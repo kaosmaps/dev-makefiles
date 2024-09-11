@@ -6,28 +6,22 @@ include makefiles/config.mk
 
 .PHONY: .create-module-api
 
-define API_STRUCTURE
-mkdir -p $(TARGET_DIR)/$(SRC_DIR)/$(subst -,_,$(SAUBER_PACKAGE_NAME))/api/{v1,v2}/{routes,models,dependencies}
-touch $(TARGET_DIR)/$(SRC_DIR)/$(subst -,_,$(SAUBER_PACKAGE_NAME))/api/__init__.py \
-      $(TARGET_DIR)/$(SRC_DIR)/$(subst -,_,$(SAUBER_PACKAGE_NAME))/api/v1/__init__.py \
-      $(TARGET_DIR)/$(SRC_DIR)/$(subst -,_,$(SAUBER_PACKAGE_NAME))/api/v2/__init__.py
-endef
-export API_STRUCTURE
-
 .create-module-api:
 	@echo "Creating API structure and files..."
-	@$(API_STRUCTURE)
-	@echo "$$API_INIT_CONTENT" > $(TARGET_DIR)/$(SRC_DIR)/$(subst -,_,$(SAUBER_PACKAGE_NAME))/api/__init__.py
-	@echo "$$API_V1_CONTENT" > $(TARGET_DIR)/$(SRC_DIR)/$(subst -,_,$(SAUBER_PACKAGE_NAME))/api/v1/api.py
-	@echo "$$API_V2_CONTENT" > $(TARGET_DIR)/$(SRC_DIR)/$(subst -,_,$(SAUBER_PACKAGE_NAME))/api/v2/api.py
-	@echo "$$API_USERS_ROUTE_CONTENT" > $(TARGET_DIR)/$(SRC_DIR)/$(subst -,_,$(SAUBER_PACKAGE_NAME))/api/v1/routes/users.py
-	@echo "$$API_ITEMS_ROUTE_CONTENT" > $(TARGET_DIR)/$(SRC_DIR)/$(subst -,_,$(SAUBER_PACKAGE_NAME))/api/v1/routes/items.py
-	@echo "$$API_USER_MODEL_CONTENT" > $(TARGET_DIR)/$(SRC_DIR)/$(subst -,_,$(SAUBER_PACKAGE_NAME))/api/v1/models/user.py
-	@echo "$$API_ITEM_MODEL_CONTENT" > $(TARGET_DIR)/$(SRC_DIR)/$(subst -,_,$(SAUBER_PACKAGE_NAME))/api/v1/models/item.py
-	@echo "$$API_AUTH_CONTENT" > $(TARGET_DIR)/$(SRC_DIR)/$(subst -,_,$(SAUBER_PACKAGE_NAME))/api/v1/dependencies/auth.py
+	@API_PATH=$(TARGET_DIR)/$(SRC_DIR)/$(subst -,_,$(SAUBER_PACKAGE_NAME))/$(if $(SAUBER_DOMAIN),$(SAUBER_DOMAIN)/)api; \
+	mkdir -p $$API_PATH/{v1,v2}/{routes,models,dependencies}; \
+	touch $$API_PATH/__init__.py $$API_PATH/v1/__init__.py $$API_PATH/v2/__init__.py; \
+	echo "$$API_INIT_CONTENT" > $$API_PATH/__init__.py; \
+	echo "$$API_V1_CONTENT" > $$API_PATH/v1/api.py; \
+	echo "$$API_V2_CONTENT" > $$API_PATH/v2/api.py; \
+	echo "$$API_USERS_ROUTE_CONTENT" > $$API_PATH/v1/routes/users.py; \
+	echo "$$API_ITEMS_ROUTE_CONTENT" > $$API_PATH/v1/routes/items.py; \
+	echo "$$API_USER_MODEL_CONTENT" > $$API_PATH/v1/models/user.py; \
+	echo "$$API_ITEM_MODEL_CONTENT" > $$API_PATH/v1/models/item.py; \
+	echo "$$API_AUTH_CONTENT" > $$API_PATH/v1/dependencies/auth.py
 
 define API_INIT_CONTENT
-# src/$(subst -,_,$(SAUBER_PACKAGE_NAME))/api/__init__.py
+# src/$(subst -,_,$(SAUBER_PACKAGE_NAME))/$(if $(SAUBER_DOMAIN),$(SAUBER_DOMAIN)/)api/__init__.py
 from fastapi import FastAPI
 from $(subst -,_,$(SAUBER_PACKAGE_NAME)).core.config import settings
 from .v1.api import api_router as api_router_v1
@@ -47,7 +41,7 @@ endef
 export API_INIT_CONTENT
 
 define API_V1_CONTENT
-# src/$(subst -,_,$(SAUBER_PACKAGE_NAME))/api/v1/api.py
+# src/$(subst -,_,$(SAUBER_PACKAGE_NAME))/$(if $(SAUBER_DOMAIN),$(SAUBER_DOMAIN)/)api/v1/api.py
 from fastapi import APIRouter
 from $(subst -,_,$(SAUBER_PACKAGE_NAME)).api.v1.routes import users, items
 
@@ -58,7 +52,7 @@ endef
 export API_V1_CONTENT
 
 define API_V2_CONTENT
-# src/$(subst -,_,$(SAUBER_PACKAGE_NAME))/api/v2/api.py
+# src/$(subst -,_,$(SAUBER_PACKAGE_NAME))/$(if $(SAUBER_DOMAIN),$(SAUBER_DOMAIN)/)api/v2/api.py
 from fastapi import APIRouter
 
 api_router = APIRouter()
@@ -70,7 +64,7 @@ endef
 export API_V2_CONTENT
 
 define API_USERS_ROUTE_CONTENT
-# src/$(subst -,_,$(SAUBER_PACKAGE_NAME))/api/v1/routes/users.py
+# src/$(subst -,_,$(SAUBER_PACKAGE_NAME))/$(if $(SAUBER_DOMAIN),$(SAUBER_DOMAIN)/)api/v1/routes/users.py
 from fastapi import APIRouter, Depends
 
 from $(subst -,_,$(SAUBER_PACKAGE_NAME)).api.v1.dependencies.auth import get_current_user
@@ -97,7 +91,7 @@ endef
 export API_USERS_ROUTE_CONTENT
 
 define API_ITEMS_ROUTE_CONTENT
-# src/$(subst -,_,$(SAUBER_PACKAGE_NAME))/api/v1/routes/items.py
+# src/$(subst -,_,$(SAUBER_PACKAGE_NAME))/$(if $(SAUBER_DOMAIN),$(SAUBER_DOMAIN)/)api/v1/routes/items.py
 from fastapi import APIRouter, Depends
 
 from $(subst -,_,$(SAUBER_PACKAGE_NAME)).api.v1.dependencies.auth import get_current_user
@@ -120,7 +114,7 @@ endef
 export API_ITEMS_ROUTE_CONTENT
 
 define API_USER_MODEL_CONTENT
-# src/$(subst -,_,$(SAUBER_PACKAGE_NAME))/api/v1/models/user.py
+# src/$(subst -,_,$(SAUBER_PACKAGE_NAME))/$(if $(SAUBER_DOMAIN),$(SAUBER_DOMAIN)/)api/v1/models/user.py
 from pydantic import BaseModel, ConfigDict
 
 class UserBase(BaseModel):
@@ -141,7 +135,7 @@ endef
 export API_USER_MODEL_CONTENT
 
 define API_ITEM_MODEL_CONTENT
-# src/$(subst -,_,$(SAUBER_PACKAGE_NAME))/api/v1/models/item.py
+# src/$(subst -,_,$(SAUBER_PACKAGE_NAME))/$(if $(SAUBER_DOMAIN),$(SAUBER_DOMAIN)/)api/v1/models/item.py
 from pydantic import BaseModel, ConfigDict
 
 class ItemBase(BaseModel):
@@ -161,7 +155,7 @@ endef
 export API_ITEM_MODEL_CONTENT
 
 define API_AUTH_CONTENT
-# src/$(subst -,_,$(SAUBER_PACKAGE_NAME))/api/v1/dependencies/auth.py
+# src/$(subst -,_,$(SAUBER_PACKAGE_NAME))/$(if $(SAUBER_DOMAIN),$(SAUBER_DOMAIN)/)api/v1/dependencies/auth.py
 from fastapi import Depends
 from fastapi.security import OAuth2PasswordBearer
 from $(subst -,_,$(SAUBER_PACKAGE_NAME)).api.v1.models.user import User
