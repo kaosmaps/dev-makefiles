@@ -19,10 +19,4 @@
 
 .create-domain-modules:
 	@echo "Creating domain module structures and files..."
-	@$(MAKE) -f makefiles/domain_module_core.mk .create-domain-module-core
-	@$(MAKE) -f makefiles/domain_module_api.mk .create-domain-module-api
-	@$(MAKE) -f makefiles/domain_module_services.mk .create-domain-module-services
-	@$(MAKE) -f makefiles/domain_module_cli.mk .create-domain-module-cli
-	@$(MAKE) -f makefiles/domain_module_app.mk .create-domain-module-app
-	@$(MAKE) -f makefiles/domain_module_resources.mk .create-domain-module-resources
-	@$(MAKE) -f makefiles/domain_module_utils.mk .create-domain-module-utils
+	@$(MAKE) -f makefiles/domain_module_agents.mk .create-domain-module-agents

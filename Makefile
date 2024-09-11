@@ -21,7 +21,7 @@ endif
 .PHONY: activate-venv all clean create-dockerfiles create-files create-modules create-package create-pyproject create-readme-notebook create-scripts generate-readme install-deps scaffold setup-env setup-git setup-github setup-hooks test update-readme-notebook docker-setup docker-build docker-compose-up create-utils create-docs
 
 # Main target that sets up the entire project
-all: clean create-package create-pyproject create-modules create-tests create-scripts create-dockerfiles generate-readme create-readme-notebook setup-env activate-venv install-deps setup-git setup-hooks setup-github
+all: clean create-package create-pyproject create-modules create-domain-modules create-tests create-scripts create-dockerfiles generate-readme create-readme-notebook setup-env activate-venv install-deps setup-git setup-hooks setup-github
 
 activate-venv:
 	@$(MAKE) -f makefiles/environment.mk .activate-venv
@@ -34,6 +34,9 @@ create-dockerfiles:
 
 create-modules:
 	@$(MAKE) -f makefiles/modules.mk .create-modules
+
+create-domain-modules:
+	@$(MAKE) -f makefiles/domain_module_agents.mk .create-domain-module-agents
 
 create-package:
 	@$(MAKE) -f makefiles/package.mk .create-package TARGET_DIR=$(TARGET_DIR)
