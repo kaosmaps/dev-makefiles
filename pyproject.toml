@@ -1,0 +1,53 @@
+[tool.poetry]
+name = "dev-makefiles"
+version = "0.0.1"
+description = "A Python package for tool vision"
+authors = ["Your Name <you@example.com>"]
+readme = "README.md"
+packages = [{include = "dev_makefiles", from = "src"}]
+
+[tool.poetry.dependencies]
+python = "^3.12.3"
+fastapi = "*"
+ uvicorn = "*"
+ pydantic = "*"
+ pydantic-settings = "*"
+ python-dotenv-vault = "*"
+ click = "*"
+ streamlit = "*"
+ plotly = "*"
+
+
+[tool.poetry.group.dev.dependencies]
+pytest = "*"
+ ruff = "*"
+ isort = "*"
+ mypy = "*"
+ pre-commit = "*"
+ sphinx = "*"
+ sphinx-autodoc-typehints = "*"
+ myst-parser = "*"
+
+
+[tool.poetry.scripts]
+dev-makefiles = "dev_makefiles.cli.commands:cli"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["src"]
+
+[tool.ruff]
+line-length = 88
+target-version = "py312"
+
+[tool.isort]
+profile = "black"
+line_length = 88
+
+[tool.mypy]
+SAUBER_PYTHON_VERSION = "3.12.3"
+strict = true

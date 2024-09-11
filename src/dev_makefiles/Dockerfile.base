@@ -1,0 +1,34 @@
+FROM python:3.12.3-slim
+
+# Install system dependencies
+RUN apt-get update && apt-get install -y curl libgl1-mesa-glx libglib2.0-0 && rm -rf /var/lib/apt/lists/*
+
+# Install Poetry
+RUN curl -sSL https://install.python-poetry.org | python3 -
+
+# Add Poetry to PATH
+ENV PATH="${PATH}:/root/.local/bin"
+
+# Configure Poetry
+RUN poetry config virtualenvs.create false
+
+# Set working directory
+WORKDIR /app
+
+# Copy only requirements to cache them in docker layer
+COPY pyproject.toml poetry.lock* ./
+
+# Project initialization:
+RUN poetry install --no-interaction --no-ansi --no-root
+
+# Copy project
+COPY . .
+
+# Install project
+RUN poetry install --no-interaction --no-ansi
+
+# Copy model files (if applicable)
+# COPY src/dev_makefiles/core/models /app/dev_makefiles/core/models
+
+# Run download script (if applicable)
+# RUN python -c "from dev_makefiles.core import download_model_files; download_model_files()"

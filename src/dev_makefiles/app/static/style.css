@@ -1,0 +1,87 @@
+/* src/dev_makefiles/app/static/style.css */
+body {
+    font-family: 'Roboto', sans-serif;
+    background-color: #FAFAFA;
+    color: #212121;
+}
+
+.stApp {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem;
+}
+
+h1 {
+    color: #1976D2;
+    font-weight: 300;
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+}
+
+.stButton > button {
+    background-color: #2196F3;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    padding: 0.5rem 1rem;
+    font-size: 1rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    box-shadow: 0 2px 5px 0 rgba(0,0,0,0.16), 0 2px 10px 0 rgba(0,0,0,0.12);
+    transition: background-color 0.3s ease;
+}
+
+.stButton > button:hover {
+    background-color: #1E88E5;
+}
+
+.stTextInput > div > div > input {
+    border-radius: 4px;
+    border: 1px solid #BDBDBD;
+    padding: 0.5rem;
+    font-size: 1rem;
+}
+
+.stTextInput > div > div > input:focus {
+    border-color: #2196F3;
+    box-shadow: 0 0 0 1px #2196F3;
+}
+
+.stSelectbox > div > div > select {
+    border-radius: 4px;
+    border: 1px solid #BDBDBD;
+    padding: 0.5rem;
+    font-size: 1rem;
+}
+
+.stSelectbox > div > div > select:focus {
+    border-color: #2196F3;
+    box-shadow: 0 0 0 1px #2196F3;
+}
+
+.stDataFrame {
+    border: none;
+    box-shadow: 0 2px 5px 0 rgba(0,0,0,0.16), 0 2px 10px 0 rgba(0,0,0,0.12);
+}
+
+.stDataFrame [data-testid="stTable"] {
+    border-collapse: separate;
+    border-spacing: 0;
+}
+
+.stDataFrame [data-testid="stTable"] th {
+    background-color: #E3F2FD;
+    color: #1976D2;
+    font-weight: 500;
+    text-align: left;
+    padding: 0.75rem;
+}
+
+.stDataFrame [data-testid="stTable"] td {
+    padding: 0.75rem;
+    border-top: 1px solid #E0E0E0;
+}
+
+.stDataFrame [data-testid="stTable"] tr:nth-child(even) {
+    background-color: #F5F5F5;
+}
