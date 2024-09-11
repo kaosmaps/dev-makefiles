@@ -8,7 +8,7 @@ include makefiles/config.mk
 
 .create-module-core:
 	@echo "Creating core structure and files..."
-	@CORE_PATH=$(TARGET_DIR)/$(SRC_DIR)/$(if $(SAUBER_DOMAIN),$(SAUBER_DOMAIN)/)$(subst -,_,$(SAUBER_PACKAGE_NAME))/core; \
+	@CORE_PATH=$(TARGET_DIR)/$(SRC_DIR)/$(subst -,_,$(SAUBER_PACKAGE_NAME))/$(if $(SAUBER_DOMAIN),$(SAUBER_DOMAIN)/)core; \
 	mkdir -p $$CORE_PATH; \
 	touch $$CORE_PATH/{__init__.py,demo.py,config.py}; \
 	echo "$$CORE_INIT_CONTENT" > $$CORE_PATH/__init__.py; \
@@ -16,7 +16,7 @@ include makefiles/config.mk
 	echo "$$CORE_CONFIG_CONTENT" > $$CORE_PATH/config.py
 
 define CORE_INIT_CONTENT
-# src/$(if $(SAUBER_DOMAIN),$(SAUBER_DOMAIN)/)$(subst -,_,$(SAUBER_PACKAGE_NAME))/core/__init__.py
+# src/$(subst -,_,$(SAUBER_PACKAGE_NAME))/$(if $(SAUBER_DOMAIN),$(SAUBER_DOMAIN)/)core/__init__.py
 from .demo import demo_function
 from .config import settings
 
@@ -25,14 +25,14 @@ endef
 export CORE_INIT_CONTENT
 
 define CORE_DEMO_CONTENT
-# src/$(if $(SAUBER_DOMAIN),$(SAUBER_DOMAIN)/)$(subst -,_,$(SAUBER_PACKAGE_NAME))/core/demo.py
+# src/$(subst -,_,$(SAUBER_PACKAGE_NAME))/$(if $(SAUBER_DOMAIN),$(SAUBER_DOMAIN)/)core/demo.py
 def demo_function():
     return 'Hello from $(SAUBER_PACKAGE_NAME) core!'
 endef
 export CORE_DEMO_CONTENT
 
 define CORE_CONFIG_CONTENT
-# src/$(if $(SAUBER_DOMAIN),$(SAUBER_DOMAIN)/)$(subst -,_,$(SAUBER_PACKAGE_NAME))/core/config.py
+# src/$(subst -,_,$(SAUBER_PACKAGE_NAME))/$(if $(SAUBER_DOMAIN),$(SAUBER_DOMAIN)/)core/config.py
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
 class Settings(BaseSettings):
