@@ -1,5 +1,5 @@
-# Version: 1.0.6
-# Last updated: 2024-03-14
+# Framework version: 0.0.1
+# Module version: 0.0.1
 
 .PHONY: .create-package
 

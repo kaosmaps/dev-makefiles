@@ -1,5 +1,5 @@
-# Version: 1.0.11
-# Last updated: 2024-03-14
+# Framework version: 0.0.1
+# Module version: 0.0.1
 
 # Central  coordinator
 .PHONY: .ensure-package .ensure-package-files

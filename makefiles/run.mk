@@ -1,3 +1,6 @@
+# Framework version: 0.0.1
+# Module version: 0.0.1
+
 # Tasks for running different parts of the application
 .PHONY: .run-streamlit .run-api .run-cli
 
