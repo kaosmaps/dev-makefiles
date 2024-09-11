@@ -1,4 +1,4 @@
-# src/agents/dev_makefiles/core/__init__.py
+# src/dev_makefiles/agents/core/__init__.py
 from .demo import demo_function
 from .config import settings
 

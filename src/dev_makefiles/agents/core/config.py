@@ -1,4 +1,4 @@
-# src/agents/dev_makefiles/core/config.py
+# src/dev_makefiles/agents/core/config.py
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
 class Settings(BaseSettings):
