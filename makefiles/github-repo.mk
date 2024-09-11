@@ -8,7 +8,7 @@ include makefiles/confirm.mk
 
 .github-repo-setup:
 	@echo "Setting up GitHub repository..."
-	@if [ "$(call confirm,Create GitHub repository?,N)" = "true" ]; then \
+	@if [ "$(call confirm,Create GitHub repository?,Y)" = "true" ]; then \
 		if command -v gh >/dev/null 2>&1; then \
 			if [ -z "$$(gh auth status 2>&1 | grep Logged)" ]; then \
 				echo "Please log in to GitHub:"; \

@@ -6,7 +6,7 @@ confirm() {
     local ans
 
     while true; do
-        read -p "$prompt [Y/n]: " ans
+        read -p "$prompt [$default]: " ans
         case "$ans" in
             [Yy]*|[Yy][Ee][Ss]*) echo "true"; return 0 ;;
             [Nn]*|[Nn][Oo]*) echo "false"; return 0 ;;
